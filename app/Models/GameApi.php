@@ -12,7 +12,8 @@ class GameApi
     {
         $games = Cache::remember('all_games', 3600, function () {
             $client = new Client();
-            $response = $client->get('http://localhost:3000/games');
+            $apiUrl = env('API_URL');
+            $response = $client->get($apiUrl . 'games');
 
             if ($response->getStatusCode() !== 200) {
                 // Handle the API request failure
@@ -31,7 +32,8 @@ class GameApi
     {
         $games = Cache::remember('history_games', 3600, function () {
             $client = new Client();
-            $response = $client->get('http://localhost:3000/games/history');
+            $apiUrl = env('API_URL');
+            $response = $client->get($apiUrl . 'games/history');
 
             if ($response->getStatusCode() !== 200) {
                 // Handle the API request failure
@@ -47,7 +49,8 @@ class GameApi
     public static function bet_history($userEmail)
     {
         $client = new Client();
-        $response = $client->get("http://localhost:3000/bets/user/{$userEmail}");
+        $apiUrl = env('API_URL');
+        $response = $client->get($apiUrl . "bets/user/{$userEmail}");
 
 
         if ($response->getStatusCode() !== 200) {
@@ -63,7 +66,8 @@ class GameApi
     public static function bet_total($userEmail)
     {
         $client = new Client();
-        $response = $client->get("http://localhost:3000/bets/total/{$userEmail}");
+        $apiUrl = env('API_URL');
+        $response = $client->get($apiUrl . "bets/total/{$userEmail}");
 
 
         if ($response->getStatusCode() !== 200) {
@@ -78,7 +82,8 @@ class GameApi
     public static function createBet(array $data)
     {
         $client = new Client();
-        $response = $client->post('http://localhost:3000/bets', [
+        $apiUrl = env('API_URL');
+        $response = $client->post($apiUrl . 'bets', [
             'json' => $data,
         ]);
 
@@ -90,7 +95,8 @@ class GameApi
     public static function getUserData($email)
     {
         $client = new Client();
-        $response = $client->get("http://localhost:3000/users/{$email}");
+        $apiUrl = env('API_URL');
+        $response = $client->get($apiUrl . "users/{$email}");
 
 
         if ($response->getStatusCode() !== 200) {
@@ -105,7 +111,8 @@ class GameApi
     public static function getTopBetters()
     {
         $client = new Client();
-        $response = $client->get("http://localhost:3000/bets/topBetters");
+        $apiUrl = env('API_URL');
+        $response = $client->get($apiUrl . "bets/topBetters");
 
 
         if ($response->getStatusCode() !== 200) {

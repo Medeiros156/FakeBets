@@ -67,12 +67,13 @@ Route::get('/totalBets', [BetController::class, 'getTotalBets'])
 
 
 
-Route::get('/bet/confirmation/{value}', function ($value, Illuminate\Http\Request $request) {
+Route::get('/bet/confirmation', function (Illuminate\Http\Request $request) {
     $oddsValue = $request->query('oddsValue');
     $oddTeam = $request->query('oddTeam');
     $teamA = $request->query('teamA');
     $teamB = $request->query('teamB');
     $gameId = $request->query('gameId');
+    $value = $request->query('value');
     return Inertia::render('Bet/Bet_confirmation', [
         'oddsValue' => $oddsValue,
         'oddTeam' => $oddTeam,
